@@ -4,7 +4,7 @@ public class Project {
 
 	private long projectId;
 	private String name;
-	private String stage; // INCOMPLETE, INPROGRESS, COMPLETED
+	private String stage; // NOTSTARTED, INPROGRESS, COMPLETED
 	private String description;
 	
 	public Project() {}
