@@ -1,10 +1,19 @@
 package com.jrp.pma.entities;
 
-public class Project {
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+public class Project {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long projectId;
+	
 	private String name;
+	
 	private String stage; // NOTSTARTED, INPROGRESS, COMPLETED
+	
 	private String description;
 	
 	public Project() {}
@@ -39,8 +48,5 @@ public class Project {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-	
 	
 }
