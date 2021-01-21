@@ -26,7 +26,8 @@ public class ProjectController {
 	// handle submission from the form via the action = /project/save
 	@PostMapping("/save") // PostMapping is another way instead of using the attribute method in the @RequestMapping
 	public String createProject(Project project, Model model) { // model is send from the template
-		//this should handle saving to teh database
+		//this should handle saving to the database
+		
 	}
 	
 	
