@@ -1,11 +1,13 @@
 package com.jrp.pma.contollers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jrp.pma.dao.ProjectRepository;
 import com.jrp.pma.entities.Project;
 
 
@@ -15,6 +17,9 @@ import com.jrp.pma.entities.Project;
 @RequestMapping("/projects") 
 public class ProjectController {
 
+	@Autowired
+	ProjectRepository proRepo;
+	
 	@GetMapping("/new")
 	public String displayProjectForm(Model model) { // model binds the object to the template
 		Project aProject = new Project();
@@ -27,7 +32,10 @@ public class ProjectController {
 	@PostMapping("/save") // PostMapping is another way instead of using the attribute method in the @RequestMapping
 	public String createProject(Project project, Model model) { // model is send from the template
 		//this should handle saving to the database
+		proRepo.save(project);
 		
+		// use redirect to prevent duplicate submissions
+		return "redirect:/new";
 	}
 	
 	
