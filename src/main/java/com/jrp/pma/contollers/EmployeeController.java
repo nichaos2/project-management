@@ -22,7 +22,7 @@ public class EmployeeController {
 	public String displayEmployeeForm(Model model) {		
 		Employee employee = new Employee();
 		model.addAttribute("employee", employee);		
-		return "new-employee";
+		return "employees/new-employee";
 	}
 	
 	@PostMapping("/save")
