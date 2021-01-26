@@ -36,6 +36,27 @@
 			</tbody>
 		</table>
 	</div>
+	
+		<div>
+		<h4>Current Employeess</h4>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Employee First Name</th>
+					<th>Employee Last Name</th>
+					<th>Employee Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="employee : ${employeesList}">
+					<td th:text="${employee.firstName}" />
+					<td th:text="${employee.lastName}" />
+					<td th:text="${employee.email}" />
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 
 </body>
