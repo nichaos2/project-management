@@ -24,7 +24,7 @@ public class ProjectController {
 		Project aProject = new Project();
 		model.addAttribute("project", aProject);
 
-		return "new-project";
+		return "projects/new-project";
 	}
 
 	// handle submission from the form via the action = /project/save
