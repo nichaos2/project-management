@@ -1,5 +1,7 @@
 package com.jrp.pma.contollers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,8 @@ public class EmployeeController {
 	@GetMapping("/new")
 	public String displayEmployeeForm(Model model) {		
 		Employee employee = new Employee();
-		model.addAttribute("employee", employee);		
+		model.addAttribute("employee", employee);	
+		
 		return "employees/new-employee";
 	}
 	
@@ -30,8 +33,16 @@ public class EmployeeController {
 		
 		emplRepo.save(employee);
 		
-		return "redirect:/employees/new";
+		return "redirect:/employees";
+	}
+	
+	@GetMapping
+	public String displayEmployeeList(Model model) {		
 		
+		//query database for Employees
+		List<Employee> employees = emplRepo.findAll();
+		model.addAttribute("employees", employees);
 		
+		return "employees/list-employees";
 	}
 }

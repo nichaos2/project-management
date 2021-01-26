@@ -1,5 +1,7 @@
 package com.jrp.pma.contollers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +37,17 @@ public class ProjectController {
 		proRepo.save(project);
 
 		// use redirect to prevent duplicate submissions
-		return "redirect:/projects/new"; // we need the first /
+		return "redirect:/projects"; // we need the first /
+	}
+	
+	@GetMapping
+	public String displayProjectList(Model model) { // model binds the object to the template
+		// query database for Projects
+		List<Project> projects = proRepo.findAll();
+		model.addAttribute("projects",projects);
+		
+
+		return "projects/list-projects";
 	}
 
 }
