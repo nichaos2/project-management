@@ -8,8 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jrp.pma.dao.EmployeeRepository;
 import com.jrp.pma.dao.ProjectRepository;
+import com.jrp.pma.entities.Employee;
 import com.jrp.pma.entities.Project;
 
 // we need the controller for the form in the template new-project
@@ -20,11 +23,17 @@ public class ProjectController {
 
 	@Autowired
 	ProjectRepository proRepo;
+	
+	@Autowired
+	EmployeeRepository empRepo;
 
 	@GetMapping("/new")
 	public String displayProjectForm(Model model) { // model binds the object to the template
 		Project aProject = new Project();
 		model.addAttribute("project", aProject);
+		
+		List<Employee> employees = empRepo.findAll();
+		model.addAttribute("allEmployees", employees);
 
 		return "projects/new-project";
 	}
@@ -32,10 +41,17 @@ public class ProjectController {
 	// handle submission from the form via the action = /project/save
 	@PostMapping("/save") // PostMapping is another way instead of using the attribute method in the
 							// @RequestMapping
-	public String createProject(Project project, Model model) { // model is send from the template
+	public String createProject(Project project, @RequestParam List<Long> employees, Model model) { // model is send from the template
 		// this should handle saving to the database
 		proRepo.save(project);
-
+		
+		// this handles the employee property projectId, which is the foreign key 
+		Iterable<Employee> chosenEmployees = empRepo.findAllById(employees); // find all the employees from the id list we chose in the form
+		for (Employee emp : chosenEmployees) {
+			emp.setProject(project); // update the employee object project 
+			empRepo.save(emp); // save the new employee
+		}
+		
 		// use redirect to prevent duplicate submissions
 		return "redirect:/projects"; // we need the first /
 	}
