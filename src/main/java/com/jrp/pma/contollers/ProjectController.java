@@ -42,7 +42,7 @@ public class ProjectController {
 	@PostMapping("/save") // PostMapping is another way instead of using the attribute method in the
 							// @RequestMapping
 	public String createProject(Project project, @RequestParam List<Long> employees, Model model) { // model is send from the template
-		// this should handle saving to the database
+		// this handles saving the project to the database
 		proRepo.save(project);
 		
 		// this handles the employee property projectId, which is the foreign key 
@@ -51,6 +51,29 @@ public class ProjectController {
 			emp.setProject(project); // update the employee object project 
 			empRepo.save(emp); // save the new employee
 		}
+		
+		// use redirect to prevent duplicate submissions
+		return "redirect:/projects"; // we need the first /
+	}
+	
+	
+	// handle submission from the form via the action = /project/save
+	@PostMapping("/save2") // PostMapping is another way instead of using the attribute method in the
+							// @RequestMapping
+	public String createProject2(Project project, Model model) { // model is send from the template
+
+		// get the Employees from the project object send by the form
+		Iterable<Employee> employees = project.getEmployees(); 
+		
+		// set the project to each employee
+		for (Employee emp : employees) {
+			emp.setProject(project);
+		}
+		
+		// this handles saving the project to the database; 
+		// and thanks to Cascade the Employee object is saved to the database too 
+		proRepo.save(project);
+
 		
 		// use redirect to prevent duplicate submissions
 		return "redirect:/projects"; // we need the first /
