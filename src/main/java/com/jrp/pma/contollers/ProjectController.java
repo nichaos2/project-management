@@ -61,14 +61,6 @@ public class ProjectController {
 	@PostMapping("/save2") // PostMapping is another way instead of using the attribute method in the
 							// @RequestMapping
 	public String createProject2(Project project, Model model) { // model is send from the template
-
-		// get the Employees from the project object send by the form
-		Iterable<Employee> employees = project.getEmployees(); 
-		
-		// set the project to each employee
-		for (Employee emp : employees) {
-			emp.setProject(project);
-		}
 		
 		// this handles saving the project to the database; 
 		// and thanks to Cascade the Employee object is saved to the database too 
