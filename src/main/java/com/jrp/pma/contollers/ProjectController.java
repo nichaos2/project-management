@@ -39,6 +39,8 @@ public class ProjectController {
 	}
 
 	// handle submission from the form via the action = /project/save
+	// this method works for OneToMany Relation where we need all this code to save the PRoject andn the Employee
+	// it is not used to the actual project rigth now but kept to remember how ot should be for a OneToMany relation case
 	@PostMapping("/save") // PostMapping is another way instead of using the attribute method in the
 							// @RequestMapping
 	public String createProject(Project project, @RequestParam List<Long> employees, Model model) { // model is send from the template
@@ -64,6 +66,7 @@ public class ProjectController {
 		
 		// this handles saving the project to the database; 
 		// and thanks to Cascade the Employee object is saved to the database too 
+		// this is also thanks to the ManyToMAny relation
 		proRepo.save(project);
 
 		
