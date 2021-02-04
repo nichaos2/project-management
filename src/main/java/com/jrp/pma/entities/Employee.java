@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
 public class Employee {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY) // IDENTITY strategy is important when we rely on the data.sql file to seed the database
 	private long employeeId;
 	
 	private String firstName;
