@@ -16,6 +16,6 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
 	public List<Project> findAll();
 
 	
-	@Query(nativeQuery=true, value = " select stage, count(stage) as stageCnt from project group by stage order by stageCnt Desc;")
+	@Query(nativeQuery=true, value = " select stage, count(stage) as stageCnt from project group by stage ;")
 	public List<StageCount> stageCount();
 }
