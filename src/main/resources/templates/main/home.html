@@ -40,7 +40,13 @@
 			<!-- bootstrap -->
 			<div class="col-md-4">
 				<canvas id="myPieChart" height="50" width="50"></canvas>
-			</div>
+				
+				<!-- access the data (stageCnt)from the controller ; for this thymeleaf needs to use [[ ${name_of_model_attribute} ]] -->
+				<script> 
+					var chartData = "[[${stageCnt}]]"  
+				</script>
+
+			</div> <!-- end of canvas -->
 
 		</div>
 	</div>
