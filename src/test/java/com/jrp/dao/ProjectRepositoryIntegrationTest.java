@@ -16,6 +16,11 @@ import com.jrp.pma.ProjectManagementApplication;
 import com.jrp.pma.dao.ProjectRepository;
 import com.jrp.pma.entities.Project;
 
+// The folowing annotation are necessary because the file is not in the package pma as in the original project
+// so in this context it does not know how to proceed with the test
+// usually we use teh spring boot test functionallity
+
+
 // this annotation points to the class where the project starts
 // this brings in all the Beans and the injection we have in our project
 // so it loads the application context 
