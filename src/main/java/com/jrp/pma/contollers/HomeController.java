@@ -21,7 +21,7 @@ import com.jrp.pma.entities.Project;
 @Controller
 public class HomeController {
 
-	@Value("${envVersion}")
+	@Value("${version}")
 	private String version;
 	
 	
